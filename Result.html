@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Result - Timed Multiple-Choice Quiz Portal</title>
+    <link rel="stylesheet" href="Style.css">
+</head>
+<body>
+
+<header>
+    <img src="https://cdn-icons-png.flaticon.com/512/3407/3407024.png" alt="Quiz Logo" width="70" height="70">
+    <h1>Timed Multiple-Choice Quiz Management System</h1>
+    <p>Online Assessment &amp; Automated Score Evaluation</p>
+</header>
+
+<!-- Result & Review -->
+<section id="resultSection">
+    <h2>Test Result Summary</h2>
+    <p id="resultCandidateInfo" style="text-align: center; font-weight: bold;"></p>
+
+    <div class="score-cards">
+        <div class="score-card">
+            <span>Total Score</span>
+            <h3 id="totalScoreDisplay">0 / 10</h3>
+        </div>
+        <div class="score-card">
+            <span>Accuracy Percentage</span>
+            <h3 id="accuracyDisplay">0%</h3>
+        </div>
+        <div class="score-card">
+            <span>Time Taken</span>
+            <h3 id="timeTakenDisplay">0m 0s</h3>
+        </div>
+        <div class="score-card">
+            <span>Performance</span>
+            <h3 id="gradeDisplay">-</h3>
+        </div>
+    </div>
+
+    <h3>Answer Review</h3>
+    <div id="reviewContainer"></div>
+
+    <div style="margin-top: 20px; text-align: center;">
+        <button onclick="restartPortal()">Take Another Quiz</button>
+    </div>
+</section>
+
+<footer>
+    <p style="margin: 0;">Timed Multiple-Choice Quiz Portal</p>
+</footer>
+
+<script src="Result.js"></script>
+
+</body>
+</html>

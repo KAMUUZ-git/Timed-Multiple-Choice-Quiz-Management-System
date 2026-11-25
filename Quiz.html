@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz in Progress - Timed Multiple-Choice Quiz Portal</title>
+    <link rel="stylesheet" href="Style.css">
+</head>
+<body>
+
+<header>
+    <img src="https://cdn-icons-png.flaticon.com/512/3407/3407024.png" alt="Quiz Logo" width="70" height="70">
+    <h1>Timed Multiple-Choice Quiz Management System</h1>
+    <p>Online Assessment &amp; Automated Score Evaluation</p>
+</header>
+
+<!-- Quiz Interface -->
+<section id="quizSection">
+    <div class="quiz-topbar">
+        <span id="displayTopic">Topic: -</span>
+        <span id="displayCandidate">Candidate: -</span>
+        <span id="progressCounter">Question 1 of 10</span>
+        <span class="timer-box">Time Left: <span id="timerDisplay">05:00</span></span>
+    </div>
+
+    <div class="quiz-main-layout">
+        <div class="question-column">
+            <div class="question-box">
+                <h3 id="questionText">Loading question...</h3>
+                <div id="optionsContainer"></div>
+            </div>
+
+            <div>
+                <button class="btn-secondary" onclick="prevQuestion()">Previous</button>
+                <button onclick="nextQuestion()">Next</button>
+                <button class="btn-warning" onclick="toggleMarkReview()">Mark for Review</button>
+                <button class="btn-secondary" onclick="clearResponse()">Clear Response</button>
+            </div>
+        </div>
+
+        <div class="right-sidebar">
+            <div class="top-right-submit">
+                <button class="btn-success" onclick="submitQuiz()">Submit Test</button>
+            </div>
+
+            <strong>Question Navigation Palette</strong>
+            <div id="paletteContainer" style="margin-top: 8px;"></div>
+
+            <div class="legend">
+                <div><span style="color: #15803d; font-weight: bold;">&#9632;</span> Answered</div>
+                <div><span style="color: #d97706; font-weight: bold;">&#9632;</span> Marked for Review</div>
+                <div><span style="color: #64748b; font-weight: bold;">&#9632;</span> Unanswered</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p style="margin: 0;">Timed Multiple-Choice Quiz Portal</p>
+</footer>
+
+<script src="Quiz.js"></script>
+<script src="Result.js"></script>
+
+</body>
+</html>

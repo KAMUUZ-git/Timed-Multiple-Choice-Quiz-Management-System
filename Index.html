@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timed Multiple-Choice Quiz Portal</title>
+    <link rel="stylesheet" href="Style.css">
+</head>
+<body>
+
+<header>
+    <img src="https://cdn-icons-png.flaticon.com/512/3407/3407024.png" alt="Quiz Logo" width="70" height="70">
+    <h1>Timed Multiple-Choice Quiz Management System</h1>
+    <p>Online Assessment &amp; Automated Score Evaluation</p>
+</header>
+
+<!-- Home & Topic Selection -->
+<section id="homeSection">
+    <img class="banner" src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=1200" alt="Assessment Banner">
+    <h2>Start Assessment</h2>
+    <p style="text-align: center;">Enter candidate details and select a topic to begin the 5-minute test (10 questions).</p>
+
+    <label for="candidateName">Candidate Name (Alphabets Only) *</label>
+    <input type="text" id="candidateName" placeholder="Enter your full name (letters only)" oninput="filterNameInput(this)">
+
+    <label for="candidateId">Candidate ID / Roll Number (Exact 8 Digits) *</label>
+    <input type="text" id="candidateId" maxlength="8" inputmode="numeric" placeholder="Enter 8-digit numeric ID (e.g., 12623874)" oninput="filterIdInput(this)">
+
+    <label>Select Topic *</label>
+    <div class="topic-grid">
+        <div class="topic-card" onclick="selectTopic('General Aptitude', this)">
+            <h3>General Aptitude</h3>
+            <p>Quantitative &amp; logical questions</p>
+        </div>
+        <div class="topic-card" onclick="selectTopic('Basic C Programming', this)">
+            <h3>Basic C Programming</h3>
+            <p>Syntax, loops, types &amp; control flow</p>
+        </div>
+        <div class="topic-card" onclick="selectTopic('Computer Fundamentals', this)">
+            <h3>Computer Fundamentals</h3>
+            <p>Hardware, memory, OS &amp; number systems</p>
+        </div>
+        <div class="topic-card" onclick="selectTopic('Web Basics', this)">
+            <h3>Web Basics</h3>
+            <p>HTML elements, CSS rules &amp; JavaScript</p>
+        </div>
+    </div>
+
+    <p id="homeError" style="color: #b91c1c; font-weight: bold;"></p>
+    <button onclick="startQuiz()">Start Quiz</button>
+</section>
+
+<footer>
+    <p style="margin: 0;">Timed Multiple-Choice Quiz Portal</p>
+</footer>
+
+<script>
+    var selectedTopic = "";
+
+    // Restrict Candidate Name to letters and spaces only
+    function filterNameInput(inputElem) {
+        inputElem.value = inputElem.value.replace(/[^A-Za-z\s]/g, "");
+    }
+
+    // Restrict Candidate ID to digits only and max 8 characters
+    function filterIdInput(inputElem) {
+        inputElem.value = inputElem.value.replace(/[^0-9]/g, "").slice(0, 8);
+    }
+
+    function selectTopic(topicName, cardElement) {
+        selectedTopic = topicName;
+        var allCards = document.getElementsByClassName("topic-card");
+        for (var i = 0; i < allCards.length; i++) {
+            allCards[i].classList.remove("selected");
+        }
+        cardElement.classList.add("selected");
+        document.getElementById("homeError").innerHTML = "";
+    }
+
+    function startQuiz() {
+        var candidateName = document.getElementById("candidateName").value.trim();
+        var candidateId = document.getElementById("candidateId").value.trim();
+
+        var namePattern = /^[A-Za-z]+(\s+[A-Za-z]+)*$/;
+        var idPattern = /^[0-9]{8}$/;
+
+        if (candidateName === "" || !namePattern.test(candidateName)) {
+            document.getElementById("homeError").innerHTML = "Please enter a valid Candidate Name using alphabets only (no numbers or symbols).";
+            return;
+        }
+        if (!idPattern.test(candidateId)) {
+            document.getElementById("homeError").innerHTML = "Candidate ID must contain exactly 8 numeric digits (minimum and maximum 8 digits).";
+            return;
+        }
+        if (selectedTopic === "") {
+            document.getElementById("homeError").innerHTML = "Please select a quiz topic.";
+            return;
+        }
+
+        document.getElementById("homeError").innerHTML = "";
+
+        // Hand the candidate details over to the quiz page
+        sessionStorage.setItem("quizConfig", JSON.stringify({
+            name: candidateName,
+            id: candidateId,
+            topic: selectedTopic
+        }));
+
+        window.location.href = "Quiz.html";
+    }
+</script>
+
+</body>
+</html>
